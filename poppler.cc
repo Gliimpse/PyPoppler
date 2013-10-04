@@ -1,7 +1,7 @@
 #include "poppler.h"
 
-PopplerParser::PopplerParser (const std::string inputFilename, const std::string outputFilename ) {
-		cout << "input filename " << inputFilename << " output filename " << outputFilename << endl;
+PopplerParser::PopplerParser (const std::string inputFilename) {
+		cout << "input filename " << inputFilename << endl;
 
 		//create the document
 		//assumes no owner or userpassword
@@ -33,3 +33,4 @@ std::string PopplerParser::Parse(int page_idx) {
 		//PopplerParser::f = page_text.to_latin1();
 		return page_text;
 }
+
