@@ -2,8 +2,7 @@
 %module popplerExtension
 #define SWIG_FILE_WITH_INIT
 %{
-#include <poppler-document.h>
-#include <poppler-page.h>
+
 %}
 
 %{
