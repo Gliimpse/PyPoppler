@@ -30,11 +30,12 @@
 //========================================================================
 
 #include "config.h"
-#include <poppler-config.h>
+#include "poppler-config.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
 #include <string.h>
+#include <iostream>
 #include "parseargs.h"
 #include "printencodings.h"
 #include "goo/GooString.h"
@@ -201,6 +202,7 @@ int main(int argc, char *argv[]) {
   }
 
   fileName = new GooString(argv[1]);
+  std::cout << "FILENAME " << fileName->getCString() << std::endl;
   if (fixedPitch) {
     physLayout = gTrue;
   }

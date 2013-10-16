@@ -1,7 +1,7 @@
 
 PYTHON = /Users/kbranson/.virtualenv/development/bin/python
 PYINC = -DHAVE_CONFIG_H -I/Users/kbranson/.virtualenv/development/include/python2.7
-PYTHON_DLINK = -Wl,-rpath,@loader_path/.
+PYTHON_DLINK = 
 
 MODULE = .so
 MODULEFLAGS = -bundle -undefined dynamic_lookup 
@@ -14,7 +14,7 @@ POPPLERINC = /usr/local/include/poppler/cpp
 VPATH = /usr/local/include/poppler/cpp
 LOCALLIBS = -lz -lpoppler-cpp
 CXX = g++
-CXXFLAGS =    -W -Wall  -DSWIG_COBJECT_TYPES  -O3 -fomit-frame-pointer -ffast-math -arch x86_64 -msse3
+CXXFLAGS =    -Wall -O3 -DSWIG_COBJECT_TYPES   -arch x86_64 
 CSOFLAGS = -dynamic -fPIC -fno-common
 CXXSHARED = ${MODULEFLAGS} 
 

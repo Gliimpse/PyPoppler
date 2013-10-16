@@ -1,20 +1,21 @@
 #include <string>
 #include <iostream>
-#include <poppler-document.h>
-#include <poppler-page.h>
-
+#include "PDFDoc.h"
+#include "Page.h"
+#include "GlobalParams.h"
 
 using namespace std;
 
 class PopplerParser 
 {
-	poppler::document *doc;
+	PDFDoc *doc;
 	std::string f;
 public:
 
 	PopplerParser (const std::string inputFilename); 
-	std::string Parse(int page_idx); 
+	std::string Parse(); 
 	int getPages();
 	//~PopplerParser();
 	int numPages;
+	static const double resolution;
 };
