@@ -15,7 +15,7 @@ public:
 	PopplerParser (const std::string inputFilename); 
 	std::string Parse(); 
 	int getPages();
-	//~PopplerParser();
+	~PopplerParser();
 	int numPages;
 	static const double resolution;
 };

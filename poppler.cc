@@ -20,11 +20,16 @@ PopplerParser::PopplerParser (const std::string inputFilename) {
 		PopplerParser::doc = PDFDocFactory().createPDFDoc(*fileName, ownerPW, userPW);
 		PopplerParser::numPages = PopplerParser::doc->getNumPages();
 		delete fileName;
-		
 	}
 
 int PopplerParser::getPages() {
 	return PopplerParser::numPages; 
+}
+
+
+PopplerParser::~PopplerParser() {
+	//delete PopplerParser::numPages;
+	delete PopplerParser::doc;
 }
 
 std::string PopplerParser::Parse() {
