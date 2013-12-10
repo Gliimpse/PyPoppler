@@ -98,16 +98,19 @@ std::string PopplerParser::Parse() {
 
 
           			//construct our string output
-          			ss <<  "xMin," << xMinA << ",yMin," << yMinA << ",xMax," << xMaxA << ",yMax," << yMaxA 
-          			<< ",red," << r << ",green," << g << ",blue,"<< b 
-          			<< ",fontSize," << fontSize 
-          			<< ",italic," << italic 
-          			<< ",serif," << serif
-          			<< ",symbolic," << symbolic
-          			<< ",fixedWidth," << fixedWidth
-          			<< ",bold,"  << bold
-          			<< ",fontName," << fontName->getCString()
-          			<< ",word," << wordString << ",page,"<< page << std::endl;
+                    ss << "{"
+          			<<  "\"xMin\":\"" << xMinA << "\",\"yMin\":\"" << yMinA << "\",\"xMax\":\"" << xMaxA << "\",\"yMax\":\"" << yMaxA 
+          			<< "\",\"red\":\"" << r << "\",\"green\":\"" << g << "\",\"blue\":\""<< b 
+          			<< "\",\"fontSize\":\"" << fontSize 
+          			<< "\",\"italic\":\"" << italic 
+          			<< "\",\"serif\":\"" << serif
+          			<< "\",\"symbolic\":\"" << symbolic
+          			<< "\",\"fixedWidth\":\"" << fixedWidth
+          			<< "\",\"bold\":\""  << bold
+          			<< "\",\"fontName\":\"" << fontName->getCString()
+          			<< "\",\"word\":\"" << wordString << "\",\"page\":\""<< page 
+                    << "\"}"
+                    << std::endl;
           			//std::cout << ss.str() << std::endl;
         		}
 			}
