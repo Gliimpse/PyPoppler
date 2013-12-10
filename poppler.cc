@@ -96,6 +96,14 @@ std::string PopplerParser::Parse() {
           			italic = fontInfo->isItalic();
           			bold = fontInfo->isBold();
 
+                    // escape quotes in string
+                    std::stringstream newStr;
+                    for (int i = 0; i < wordString.length(); ++i) {
+                        if (wordString[i] == '"') {
+                            newStr << "\\";
+                        }                 
+                        newStr << wordString[i];       
+                    }
 
           			//construct our string output
                     ss << "{"
@@ -108,7 +116,7 @@ std::string PopplerParser::Parse() {
           			<< "\",\"fixedWidth\":\"" << fixedWidth
           			<< "\",\"bold\":\""  << bold
           			<< "\",\"fontName\":\"" << fontName->getCString()
-          			<< "\",\"word\":\"" << wordString << "\",\"page\":\""<< page 
+          			<< "\",\"word\":\"" << newStr.str() << "\",\"page\":\""<< page 
                     << "\"}"
                     << std::endl;
           			//std::cout << ss.str() << std::endl;
