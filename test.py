@@ -1,5 +1,5 @@
 from popplerExtension import *
-P = PopplerParser("brian_test-2013-03-08.pdf")
+P = PopplerParser("brian_test.pdf")
 #print 'Number of pages ', P.getPages()
 print "-"*100 
 print "Starting Parse"
