@@ -1,0 +1,52 @@
+
+PYTHON = /usr/bin/python
+PYINC = -DHAVE_CONFIG_H -I/usr/include/python2.7 -I/usr/include/python2.7/config
+PYTHON_DLINK = -I/usr/include/python2.7 -I/usr/include/python2.7/config
+
+MODULE = .so
+MODULEFLAGS = -shared
+#MODULEFLAGS = -bundle -undefined dynamic_lookup
+DLL = .dylib
+LINK = 
+
+POPPLERINC = /usr/local/include/poppler/cpp
+
+VPATH = /usr/local/include/poppler/cpp 
+LOCALLIBS = -lz -lpoppler 
+CXX = g++
+CXXFLAGS = -Wall -O3 -DSWIG_COBJECT_TYPES -nostartfiles   
+CSOFLAGS = -dynamic -fPIC -fno-common
+CXXSHARED = ${MODULEFLAGS} 
+
+SWIG	= /usr/bin/swig
+SWIGOPT	= -modern -c++ -python
+
+
+OBJECT =  poppler.o popplerExtension.o
+
+_popplerExtension.so: $(OBJECT)
+	 g++ $(CXXSHARED) $(OBJECT) $(PYTHON_DLINK) -o _popplerExtension$(MODULE) ${LOCALLIBS}; \
+
+
+
+
+%.o: %.cc
+	        g++  -c $(CXXFLAGS) $(CSOFLAGS) -I$(POPPLERINC) -o $@ $< 
+
+%.o: %.cxx
+	        g++  -c $(CXXFLAGS) $(CSOFLAGS) -I$(POPPLERINC) -I$(PYINC) -o $@ $< 
+
+poppler.o: 	poppler.cc poppler.h
+popplerExtension.o: 	popplerExtension.cxx
+popplerExtension.cxx:	popplerExtension.i
+	$(SWIG) -I${VPATH}  $(SWIGOPT) -o $@ $<	
+#
+#
+clean:
+	rm *.cxx
+	rm $(OBJECT)
+
+test:
+	$(PYTHON) test.py 
+
+
