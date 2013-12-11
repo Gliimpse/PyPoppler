@@ -99,9 +99,9 @@ std::string PopplerParser::Parse() {
                     // escape quotes in string
                     std::stringstream newStr;
                     for (int i = 0; i < wordString.length(); ++i) {
-                        if (wordString[i] == '"') {
+                        if (wordString[i] == '"' || wordString[i] == '\\') {
                             newStr << "\\";
-                        }                 
+                        }                
                         newStr << wordString[i];       
                     }
 
