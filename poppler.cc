@@ -122,7 +122,7 @@ std::string PopplerParser::Parse() {
           			//construct our string output
                     ss << "{"
           			<<  "\"xMin\":\"" << xMinA << "\",\"yMin\":\"" << yMinA << "\",\"xMax\":\"" << xMaxA << "\",\"yMax\":\"" << yMaxA 
-                    << "\"lineNo\":\"" << lineNo << "\",\"tokenNo\":\"" << tokenNo
+                    << "\",lineNo\":\"" << lineNo << "\",\"tokenNo\":\"" << tokenNo
           			<< "\",\"red\":\"" << r << "\",\"green\":\"" << g << "\",\"blue\":\""<< b 
           			<< "\",\"fontSize\":\"" << fontSize 
           			<< "\",\"italic\":\"" << italic 
