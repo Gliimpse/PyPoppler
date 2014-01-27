@@ -2,6 +2,7 @@
 #include "TextOutputDev.h"
 #include <sstream>
 #include <cstring>
+#include <iostream>
 #include "PDFDocFactory.h"
 
 
@@ -35,7 +36,7 @@ PopplerParser::~PopplerParser() {
 std::string PopplerParser::Parse() {
 
 		GBool physLayout = gTrue;
-		GBool fixedPitch = gFalse;
+		double fixedPitch = 0;
 		GBool rawOrder = gFalse;
 		GBool htmlMeta = gTrue;  // required to get the bounding box information
 		int firstPage = 1;
@@ -49,6 +50,7 @@ std::string PopplerParser::Parse() {
 
 		//Word Features
 		double xMinA, yMinA, xMaxA, yMaxA, r, g, b, fontSize;
+        int tokenNo, lineNo;
 		TextWord *word;
 		GooString* fontName;
 		GBool underLined;
@@ -65,6 +67,15 @@ std::string PopplerParser::Parse() {
 		//create our page
 		 // read config file this is requried 
   		globalParams = new GlobalParams();
+
+        // debug
+        //std::cout << "firstPage " << firstPage << std::endl;
+        //std::cout << "lastPage " << lastPage << std::endl;
+        //std::cout << "resolution " << std::endl;
+        //std::cout << "physLayout " << physLayout << std::endl;
+        //std::cout << "fixedPitch " << fixedPitch << std::endl;
+        //std::cout << "rawOrder " << rawOrder << std::endl;
+        //std::cout << "htmlMeta " << htmlMeta << std::endl;
 
 		//create a textOut
 		textOut = new TextOutputDev(NULL, physLayout, fixedPitch, rawOrder, htmlMeta);
@@ -85,8 +96,12 @@ std::string PopplerParser::Parse() {
           			underLined = word->isUnderlined();
           			fontSize = word->getFontSize();
           			word->getBBox(&xMinA, &yMinA, &xMaxA, &yMaxA);
+                    word->getTokenNo(&tokenNo);
+                    word->getLineNo(&lineNo);
           			fontName = word->getFontName(0);
           			const std::string wordString = word->getText()->getCString();
+                    // debug
+                    //std::cout << wordString.c_str() << std::endl;
           			//fontIno
           			fontInfo = word->getFontInfo(0);  //do this for the first char in the word
           			fontName = fontInfo->getFontName();
@@ -104,10 +119,10 @@ std::string PopplerParser::Parse() {
                         }                
                         newStr << wordString[i];       
                     }
-
           			//construct our string output
                     ss << "{"
           			<<  "\"xMin\":\"" << xMinA << "\",\"yMin\":\"" << yMinA << "\",\"xMax\":\"" << xMaxA << "\",\"yMax\":\"" << yMaxA 
+                    << "\"lineNo\":\"" << lineNo << "\",\"tokenNo\":\"" << tokenNo
           			<< "\",\"red\":\"" << r << "\",\"green\":\"" << g << "\",\"blue\":\""<< b 
           			<< "\",\"fontSize\":\"" << fontSize 
           			<< "\",\"italic\":\"" << italic 

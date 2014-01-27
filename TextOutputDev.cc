@@ -4991,12 +4991,20 @@ void TextPage::dump(void *outputStream, TextOutputFunc outputFunc,
 
     // generate output
     col = 0;
+    int lineNo = 0;
+    int tokenNo = 0;
     for (i = 0; i < nFrags; ++i) {
       frag = &frags[i];
 
       // column alignment
       for (; col < frag->col; ++col) {
 	(*outputFunc)(outputStream, space, spaceLen);
+      }
+
+      for (word = frag->line->words; word; word = word->next) {
+        word->lineNo = lineNo;
+        word->tokenNo = tokenNo;
+        tokenNo++;
       }
 
       // print the line
@@ -5022,6 +5030,8 @@ void TextPage::dump(void *outputStream, TextOutputFunc outputFunc,
 	  d = 1;
 	}
 	for (; d > 0; --d) {
+      lineNo++;
+      tokenNo = 0;
 	  (*outputFunc)(outputStream, eol, eolLen);
 	}
 	col = 0;

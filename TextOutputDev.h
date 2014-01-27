@@ -157,6 +157,8 @@ public:
     { *r = colorR; *g = colorG; *b = colorB; }
   void getBBox(double *xMinA, double *yMinA, double *xMaxA, double *yMaxA)
     { *xMinA = xMin; *yMinA = yMin; *xMaxA = xMax; *yMaxA = yMax; }
+  void getLineNo(int *lineNoA) { *lineNoA = lineNo; }
+  void getTokenNo(int *tokenNoA) { *tokenNoA = tokenNo; }
   void getCharBBox(int charIdx, double *xMinA, double *yMinA,
 		   double *xMaxA, double *yMaxA);
   double getFontSize() { return fontSize; }
@@ -177,6 +179,8 @@ private:
 				//   (0, 1, 2, or 3)
   double xMin, xMax;		// bounding box x coordinates
   double yMin, yMax;		// bounding box y coordinates
+  int lineNo;           // line number
+  int tokenNo;          // token number (position) in line
   double base;			// baseline x or y coordinate
   Unicode *text;		// the text
   CharCode *charcode;		// glyph indices
