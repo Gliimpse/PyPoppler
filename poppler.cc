@@ -78,9 +78,12 @@ std::string PopplerParser::Parse() {
         //std::cout << "htmlMeta " << htmlMeta << std::endl;
 
 		//create a textOut
-		textOut = new TextOutputDev(NULL, physLayout, fixedPitch, rawOrder, htmlMeta);
+        GooString *textFileName = new GooString("tmp.txt");
+		textOut = new TextOutputDev(textFileName->getCString(), physLayout, fixedPitch, rawOrder, htmlMeta);
 		
 		//walk over the pages
+        PopplerParser::doc->displayPages(textOut, firstPage, lastPage, resolution, resolution, 0,
+                                        gTrue, gFalse, gFalse);
 		for (int page = firstPage; page <= lastPage; ++page) {
 			PopplerParser::doc->displayPage(textOut, page, resolution, resolution, 0, gTrue, gFalse, gFalse);
 			TextWordList *wordlist = textOut->makeWordList();
