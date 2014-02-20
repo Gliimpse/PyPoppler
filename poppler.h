@@ -3,6 +3,7 @@
 #include "PDFDoc.h"
 #include "Page.h"
 #include "GlobalParams.h"
+#include <stdio.h>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ class PopplerParser
 	std::string f;
 public:
 
-	PopplerParser (const std::string inputFilename); 
+	PopplerParser (FILE * inputFile); //const std::string inputFilename); 
 	std::string Parse(); 
 	int getPages();
 	~PopplerParser();

@@ -9,9 +9,9 @@ MODULEFLAGS = -shared
 DLL = .dylib
 LINK = 
 
-POPPLERINC = /usr/local/include/poppler/cpp
+POPPLERINC = /usr/include/poppler/cpp
 
-VPATH = /usr/local/include/poppler/cpp 
+VPATH = /usr/include/poppler/cpp 
 LOCALLIBS = -lz -lpoppler 
 CXX = g++
 CXXFLAGS = -Wall -O3 -DSWIG_COBJECT_TYPES -nostartfiles   
@@ -25,7 +25,7 @@ SWIGOPT	= -modern -c++ -python
 OBJECT =  poppler.o popplerExtension.o
 
 _popplerExtension.so: $(OBJECT)
-	 g++ $(CXXSHARED) $(OBJECT) $(PYTHON_DLINK) -o _popplerExtension$(MODULE) ${LOCALLIBS}; \
+	 g++ $(CXXSHARED) $(OBJECT) $(PYTHON_DLINK) -o _popplerExtension$(MODULE) ${LOCALLIBS}; 
 
 
 

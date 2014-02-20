@@ -13,3 +13,5 @@
 %include <std_string.i>
 %include "poppler.h";
 
+FILE *fopen(char *, char *);
+void fclose(FILE *f);

@@ -1,9 +1,9 @@
 import json
 from popplerExtension import *
 
+f = fopen("brian_test.pdf", "rb")
 
-
-P = PopplerParser("brian_test.pdf")
+P = PopplerParser(f)
 #P = PopplerParser("brian_test-2013-03-08.pdf")
 #print 'Number of pages ', P.getPages()
 print "-"*1 

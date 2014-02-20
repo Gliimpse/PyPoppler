@@ -3,24 +3,29 @@
 #include <sstream>
 #include <cstring>
 #include <iostream>
+#include "FilePDFDocBuilder.h"
 #include "PDFDocFactory.h"
-
+#include <stdio.h>
 
 const double PopplerParser::resolution = 72.0;
 
-PopplerParser::PopplerParser (const std::string inputFilename) {
+PopplerParser::PopplerParser (FILE * inputFile) { //const std::string inputFilename) {
 		GooString *ownerPW, *userPW;
 		ownerPW = NULL;
 		userPW = NULL;   //assume no user and owner passwords
-		char st[inputFilename.length()+1];
-		strcpy(st,inputFilename.c_str());
+
 		GooString* fileName;
-		fileName = new  GooString(st);
-		//create the document
-		//assumes no owner or userpassword
-		PopplerParser::doc = PDFDocFactory().createPDFDoc(*fileName, ownerPW, userPW);
+        // Uncomment if input is std::string
+		//char st[inputFilename.length()+1];
+		//strcpy(st,inputFilename.c_str());
+		//fileName = new  GooString(st);
+        //PopplerParser::doc = PDFDocFactory().createPDFDoc(*fileName, ownerPW, userPW);
+
+		// create the document
+		// assumes no owner or userpassword
+		PopplerParser::doc = FilePDFDocBuilder().buildPDFDoc(*fileName, ownerPW, userPW, inputFile);
 		PopplerParser::numPages = PopplerParser::doc->getNumPages();
-		delete fileName;
+		//delete fileName; // Uncomment if instantiate fileName
 	}
 
 int PopplerParser::getPages() {
