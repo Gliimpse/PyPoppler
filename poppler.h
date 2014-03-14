@@ -13,7 +13,7 @@ class PopplerParser
 	std::string f;
 public:
 
-	PopplerParser (FILE * inputFile); //const std::string inputFilename); 
+	PopplerParser (FILE * inputFile, std::string userPW, std::string inputPW); //const std::string inputFilename); 
 	std::string Parse(); 
 	int getPages();
 	~PopplerParser();

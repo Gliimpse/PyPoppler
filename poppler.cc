@@ -9,12 +9,36 @@
 
 const double PopplerParser::resolution = 72.0;
 
-PopplerParser::PopplerParser (FILE * inputFile) { //const std::string inputFilename) {
-		GooString *ownerPW, *userPW;
-		ownerPW = NULL;
-		userPW = NULL;   //assume no user and owner passwords
+PopplerParser::PopplerParser (FILE * inputFile, string ownerPW, string userPW ) { //const std::string inputFilename) {
+    //Logging
+    //cout << "ownerPW "<< ownerPW << endl;
+    //cout << "userPW " << userPW << endl;
+    
+    GooString *owner_pw = NULL;
+    GooString *user_pw  = NULL;
 
-		GooString* fileName;
+    if (ownerPW.size() == 0) {
+      GooString *owner_pw = NULL;
+    } else {
+      //create a GooString
+      GooString owner(ownerPW.c_str());
+      cout << "owner " << &owner;
+      owner_pw  = &owner;
+    }
+
+    if (userPW.size() == 0) {
+      GooString *user_pw = NULL;
+    } else {
+      GooString user(userPW.c_str());
+      //Create a GooString
+      user_pw = &user; 
+    }
+
+		//GooString *ownerPW, *userPW;
+		//ownerPW = NULL;
+		//userPW = NULL;   //assume no user and owner passwords
+
+		GooString* fileName = NULL;
         // Uncomment if input is std::string
 		//char st[inputFilename.length()+1];
 		//strcpy(st,inputFilename.c_str());
@@ -23,7 +47,7 @@ PopplerParser::PopplerParser (FILE * inputFile) { //const std::string inputFilen
 
 		// create the document
 		// assumes no owner or userpassword
-		PopplerParser::doc = FilePDFDocBuilder().buildPDFDoc(*fileName, ownerPW, userPW, inputFile);
+		PopplerParser::doc = FilePDFDocBuilder().buildPDFDoc(*fileName, owner_pw, user_pw, inputFile);
 		PopplerParser::numPages = PopplerParser::doc->getNumPages();
 		//delete fileName; // Uncomment if instantiate fileName
 	}
