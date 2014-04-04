@@ -146,9 +146,23 @@ std::string PopplerParser::Parse() {
                     // escape quotes in string
                     std::stringstream newStr;
                     for (int i = 0; i < wordString.length(); ++i) {
-                        if (wordString[i] == '"' || wordString[i] == '\\' || wordString[i] == '\t' || wordString[i] == '\r'){
-                            newStr << "\\";
+                        if ((wordString[i] == '"') || (wordString[i] == '\\')){
+                          newStr << "\\";
                         }
+
+                        else if (wordString[i] == '\t' ) {
+                          newStr << "\\t";
+                          continue;
+                        }
+
+                        else if (wordString[i] == '\r') {
+                          newStr << "\\r";
+                          continue;
+                        }
+
+                        // || (wordString[i] == '\r' )){
+                        //  newStr << "\\";
+                        //}
                         newStr << wordString[i];       
                     }
           			//construct our string output
