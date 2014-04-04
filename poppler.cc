@@ -148,6 +148,10 @@ std::string PopplerParser::Parse() {
                     for (int i = 0; i < wordString.length(); ++i) {
                         if (wordString[i] == '"' || wordString[i] == '\\') {
                             newStr << "\\";
+                        }
+                        //escape \t 
+                        if (wordString[i] == '\t' || wordString[i] == '\r') {
+                            newStr << "\\";
                         }                
                         newStr << wordString[i];       
                     }
